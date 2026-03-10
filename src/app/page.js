@@ -109,7 +109,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-parasWhite text-slate-900 flex items-center justify-center px-4 py-6">
       <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
-        <div className="space-y-6 order-2 md:order-1">
+        <div className="space-y-6 order-1 md:order-1">
           <div className="flex items-center gap-3">
             <Image
               src="/paras-logo.png"
@@ -158,7 +158,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="bg-white border border-parasGray rounded-2xl shadow-xl p-5 md:p-8 space-y-6 order-1 md:order-2 w-full">
+        <div className="bg-white border border-parasGray rounded-2xl shadow-xl p-5 md:p-8 space-y-6 order-2 md:order-2 w-full">
           <div className="flex rounded-full bg-parasGray/40 p-1 text-xs">
             <button
               className={`flex-1 rounded-full px-3 py-2 font-medium transition ${
