@@ -7,7 +7,8 @@ import { useEffect, useState } from "react";
 
 const menuItems = [
   { href: "/dashboard", label: "Dashboard" },
-  { href: "/dashboard/job-cards", label: "Job Card Management" },
+  // Updated to match new job card routes (/dashboard/jobcards and /dashboard/jobcards/new)
+  { href: "/dashboard/jobcards", label: "Job Card Management" },
   { href: "/dashboard/dispatch", label: "Dispatch System" },
   { href: "/dashboard/inventory", label: "Inventory Management" },
   { href: "/dashboard/users", label: "User Management", admin: true },
