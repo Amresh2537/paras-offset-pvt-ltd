@@ -9,8 +9,8 @@ const menuItems = [
   { href: "/dashboard", label: "Dashboard" },
   // Updated to match new job card routes (/dashboard/jobcards and /dashboard/jobcards/new)
   { href: "/dashboard/jobcards", label: "Job Card Management" },
-  { href: "/dashboard/dispatch", label: "Dispatch System" },
-  { href: "/dashboard/inventory", label: "Inventory Management" },
+  { href: "/dashboard/fms", label: "FMS" },
+  { href: "/dashboard/settings", label: "Settings" },
   { href: "/dashboard/users", label: "User Management", admin: true },
 ];
 
@@ -46,6 +46,22 @@ export default function DashboardLayout({ children }) {
       isMounted = false;
     };
   }, [router]);
+
+  useEffect(() => {
+    setSidebarOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!sidebarOpen) {
+      document.body.style.overflow = "";
+      return;
+    }
+
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [sidebarOpen]);
 
   async function handleLogout() {
     try {
@@ -96,11 +112,21 @@ export default function DashboardLayout({ children }) {
         </button>
       </header>
 
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <button
+          type="button"
+          aria-label="Close menu overlay"
+          onClick={() => setSidebarOpen(false)}
+          className="fixed inset-0 z-30 bg-black/40 md:hidden"
+        />
+      )}
+
       {/* Sidebar */}
       <aside
-        className={`md:static md:translate-x-0 md:w-64 shrink-0 border-r border-parasGray bg-parasBlue/5 px-4 py-6 flex flex-col transition-transform duration-200 ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
-        } fixed inset-y-0 left-0 z-20 w-64 md:flex`}
+        className={`fixed left-0 top-[61px] z-40 h-[calc(100vh-61px)] w-72 max-w-[85vw] border-r border-parasGray bg-parasBlue/5 px-4 py-6 shadow-xl transition-transform duration-200 md:static md:z-auto md:h-auto md:w-64 md:max-w-none md:translate-x-0 md:shadow-none ${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } flex flex-col`}
       >
         <div className="mb-6 hidden md:flex items-center gap-2">
           <Image
@@ -134,7 +160,6 @@ export default function DashboardLayout({ children }) {
                     ? "bg-parasBlue text-white"
                     : "text-slate-700 hover:bg-parasBlue/10 hover:text-slate-900"
                 }`}
-                onClick={() => setSidebarOpen(false)}
               >
                 {item.label}
               </Link>

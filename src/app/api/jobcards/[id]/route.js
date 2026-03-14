@@ -4,7 +4,7 @@ import JobCard from "@/models/JobCard";
 
 export async function GET(_request, { params }) {
   try {
-    const { id } = params;
+    const { id } = await params;
     await connectDB();
     const jobCard = await JobCard.findById(id).lean();
 
@@ -27,12 +27,13 @@ export async function GET(_request, { params }) {
 
 export async function PUT(request, { params }) {
   try {
-    const { id } = params;
+    const { id } = await params;
     const updates = await request.json();
+    const pdfUrl = `/api/pdf/${id}`;
 
     await connectDB();
 
-    const jobCard = await JobCard.findByIdAndUpdate(id, updates, {
+    const jobCard = await JobCard.findByIdAndUpdate(id, { ...updates, pdfUrl }, {
       new: true,
       runValidators: true,
     }).lean();
@@ -44,7 +45,7 @@ export async function PUT(request, { params }) {
       );
     }
 
-    return NextResponse.json({ message: "Job card updated", jobCard });
+    return NextResponse.json({ message: "Job card updated", jobCard, pdfUrl });
   } catch (err) {
     console.error("[jobcards][id][PUT] Error", err);
     return NextResponse.json(
@@ -56,7 +57,7 @@ export async function PUT(request, { params }) {
 
 export async function DELETE(_request, { params }) {
   try {
-    const { id } = params;
+    const { id } = await params;
     await connectDB();
 
     const result = await JobCard.findByIdAndDelete(id).lean();

@@ -24,11 +24,9 @@ export async function GET() {
   }
 }
 
-// Add a new value to a specific dropdown array
-// Body: { field: "clientNames" | "categories" | ..., value: string }
 export async function POST(request) {
   try {
-    const { field, value } = await request.json();
+    const { field, value, values } = await request.json();
 
     const allowedFields = [
       "clientNames",
@@ -53,9 +51,20 @@ export async function POST(request) {
       );
     }
 
-    if (!value || typeof value !== "string") {
+    const incomingValues = Array.isArray(values)
+      ? values
+      : value !== undefined
+        ? [value]
+        : [];
+
+    const sanitizedValues = incomingValues
+      .filter((item) => typeof item === "string")
+      .map((item) => item.trim())
+      .filter(Boolean);
+
+    if (sanitizedValues.length === 0) {
       return NextResponse.json(
-        { message: "Value is required" },
+        { message: "At least one valid value is required" },
         { status: 400 }
       );
     }
@@ -66,14 +75,27 @@ export async function POST(request) {
       doc[field] = [];
     }
 
-    if (!doc[field].includes(value)) {
-      doc[field].push(value);
+    const existingSet = new Set(doc[field]);
+    const uniqueIncoming = [...new Set(sanitizedValues)];
+
+    let addedCount = 0;
+    for (const item of uniqueIncoming) {
+      if (!existingSet.has(item)) {
+        doc[field].push(item);
+        existingSet.add(item);
+        addedCount += 1;
+      }
+    }
+
+    if (addedCount > 0) {
       await doc.save();
     }
 
     return NextResponse.json({
-      message: "Dropdown value added",
+      message: `Dropdown updated: ${addedCount} added, ${uniqueIncoming.length - addedCount} skipped`,
       dropdowns: doc,
+      addedCount,
+      skippedCount: uniqueIncoming.length - addedCount,
     });
   } catch (err) {
     console.error("[dropdowns][POST] Error", err);

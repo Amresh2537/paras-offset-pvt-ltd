@@ -165,6 +165,12 @@ const JobCardSchema = new mongoose.Schema(
 
     booking: BookingSchema,
 
+    fmsStatusByJob: [String],
+    closeJobCard: Boolean,
+    fmsRemarks: String,
+    jobOwner: String,
+    designer: String,
+
     pdfUrl: String,
   },
   { timestamps: true }

@@ -31,9 +31,15 @@ export async function POST(request) {
     }
 
     const jobCard = await JobCard.create(body);
+    const pdfUrl = `/api/pdf/${jobCard._id}`;
+
+    if (jobCard.pdfUrl !== pdfUrl) {
+      jobCard.pdfUrl = pdfUrl;
+      await jobCard.save();
+    }
 
     return NextResponse.json(
-      { message: "Job card created", jobCard },
+      { message: "Job card created", jobCard, pdfUrl },
       { status: 201 }
     );
   } catch (err) {

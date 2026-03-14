@@ -1,0 +1,273 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model JobCard {
+  id                   String   @id @default(cuid())
+  jobCardNo            String   @unique
+  jobType              String?
+  date                 DateTime?
+  poNo                 String?  @map("po_no")
+  oldJobNo             String?  @map("old_job_no")
+  paperBy              String?  @map("paper_by")
+  deliveryDate         DateTime? @map("delivery_date")
+
+  clientName           String?  @map("client_name")
+  category             String?
+  bindingType          String?  @map("binding_type")
+
+  jobName1             String?  @map("job_name_1")
+  jobName2             String?  @map("job_name_2")
+  jobName3             String?  @map("job_name_3")
+  jobName4             String?  @map("job_name_4")
+  jobName5             String?  @map("job_name_5")
+
+  qty1                 Int?     @map("qty_1")
+  qty2                 Int?     @map("qty_2")
+  qty3                 Int?     @map("qty_3")
+  qty4                 Int?     @map("qty_4")
+  qty5                 Int?     @map("qty_5")
+
+  itemCode1            String?  @map("item_code_1")
+  itemCode2            String?  @map("item_code_2")
+  itemCode3            String?  @map("item_code_3")
+  itemCode4            String?  @map("item_code_4")
+  itemCode5            String?  @map("item_code_5")
+
+  finishingSize1       String?  @map("finishing_size_1")
+  finishingSize2       String?  @map("finishing_size_2")
+  finishingSize3       String?  @map("finishing_size_3")
+  finishingSize4       String?  @map("finishing_size_4")
+  finishingSize5       String?  @map("finishing_size_5")
+
+  imageUrl1            String?  @map("image_url_1")
+  imageUrl2            String?  @map("image_url_2")
+  imageUrl3            String?  @map("image_url_3")
+  imageUrl4            String?  @map("image_url_4")
+  imageUrl5            String?  @map("image_url_5")
+
+  jobSpec              String?  @map("job_spec")
+  poplSample           String?  @map("popl_sample")
+  clientSample         String?  @map("client_sample")
+  digitalPtg           String?  @map("digital_ptg")
+  ferrow               String?
+  pdf                  String?
+  oldSheet             String?  @map("old_sheet")
+
+  paperSize1           String?  @map("paper_size_1")
+  paperSize2           String?  @map("paper_size_2")
+  paperSize3           String?  @map("paper_size_3")
+  paperSize4           String?  @map("paper_size_4")
+  paperSize5           String?  @map("paper_size_5")
+
+  gsm1                 String?  @map("gsm_1")
+  gsm2                 String?  @map("gsm_2")
+  gsm3                 String?  @map("gsm_3")
+  gsm4                 String?  @map("gsm_4")
+  gsm5                 String?  @map("gsm_5")
+
+  paperType1           String?  @map("paper_type_1")
+  paperType2           String?  @map("paper_type_2")
+  paperType3           String?  @map("paper_type_3")
+  paperType4           String?  @map("paper_type_4")
+  paperType5           String?  @map("paper_type_5")
+
+  paperMill1           String?  @map("paper_mill_1")
+  paperMill2           String?  @map("paper_mill_2")
+  paperMill3           String?  @map("paper_mill_3")
+  paperMill4           String?  @map("paper_mill_4")
+  paperMill5           String?  @map("paper_mill_5")
+
+  cuttingSize1         String?  @map("cutting_size_1")
+  cuttingSize2         String?  @map("cutting_size_2")
+  cuttingSize3         String?  @map("cutting_size_3")
+  cuttingSize4         String?  @map("cutting_size_4")
+  cuttingSize5         String?  @map("cutting_size_5")
+
+  actualSheet1         Int?     @map("actual_sheet_1")
+  actualSheet2         Int?     @map("actual_sheet_2")
+  actualSheet3         Int?     @map("actual_sheet_3")
+  actualSheet4         Int?     @map("actual_sheet_4")
+  actualSheet5         Int?     @map("actual_sheet_5")
+
+  wastageSheet1        Int?     @map("wastage_sheet_1")
+  wastageSheet2        Int?     @map("wastage_sheet_2")
+  wastageSheet3        Int?     @map("wastage_sheet_3")
+  wastageSheet4        Int?     @map("wastage_sheet_4")
+  wastageSheet5        Int?     @map("wastage_sheet_5")
+
+  forWhatPaper1        String?  @map("for_what_paper_1")
+  forWhatPaper2        String?  @map("for_what_paper_2")
+  forWhatPaper3        String?  @map("for_what_paper_3")
+  forWhatPaper4        String?  @map("for_what_paper_4")
+  forWhatPaper5        String?  @map("for_what_paper_5")
+
+  jobNamePaper1        String?  @map("job_name_paper_1")
+  jobNamePaper2        String?  @map("job_name_paper_2")
+  jobNamePaper3        String?  @map("job_name_paper_3")
+  jobNamePaper4        String?  @map("job_name_paper_4")
+  jobNamePaper5        String?  @map("job_name_paper_5")
+
+  machineName1         String?  @map("machine_name_1")
+  machineName2         String?  @map("machine_name_2")
+  machineName3         String?  @map("machine_name_3")
+  machineName4         String?  @map("machine_name_4")
+  machineName5         String?  @map("machine_name_5")
+
+  noOfPlate1           Int?     @map("no_of_plate_1")
+  noOfPlate2           Int?     @map("no_of_plate_2")
+  noOfPlate3           Int?     @map("no_of_plate_3")
+  noOfPlate4           Int?     @map("no_of_plate_4")
+  noOfPlate5           Int?     @map("no_of_plate_5")
+
+  noOfForms1           Int?     @map("no_of_forms_1")
+  noOfForms2           Int?     @map("no_of_forms_2")
+  noOfForms3           Int?     @map("no_of_forms_3")
+  noOfForms4           Int?     @map("no_of_forms_4")
+  noOfForms5           Int?     @map("no_of_forms_5")
+
+  printing1            String?  @map("printing_1")
+  printing2            String?  @map("printing_2")
+  printing3            String?  @map("printing_3")
+  printing4            String?  @map("printing_4")
+  printing5            String?  @map("printing_5")
+
+  plateType1           String?  @map("plate_type_1")
+  plateType2           String?  @map("plate_type_2")
+  plateType3           String?  @map("plate_type_3")
+  plateType4           String?  @map("plate_type_4")
+  plateType5           String?  @map("plate_type_5")
+
+  forWhatMachine1      String?  @map("for_what_machine_1")
+  forWhatMachine2      String?  @map("for_what_machine_2")
+  forWhatMachine3      String?  @map("for_what_machine_3")
+  forWhatMachine4      String?  @map("for_what_machine_4")
+  forWhatMachine5      String?  @map("for_what_machine_5")
+
+  totalSheets1         Int?     @map("total_sheets_1")
+  totalSheets2         Int?     @map("total_sheets_2")
+  totalSheets3         Int?     @map("total_sheets_3")
+  totalSheets4         Int?     @map("total_sheets_4")
+  totalSheets5         Int?     @map("total_sheets_5")
+
+  printingSide1        String?  @map("printing_side_1")
+  printingSide2        String?  @map("printing_side_2")
+  printingSide3        String?  @map("printing_side_3")
+  printingSide4        String?  @map("printing_side_4")
+  printingSide5        String?  @map("printing_side_5")
+
+  impressions1         Int?     @map("impressions_1")
+  impressions2         Int?     @map("impressions_2")
+  impressions3         Int?     @map("impressions_3")
+  impressions4         Int?     @map("impressions_4")
+  impressions5         Int?     @map("impressions_5")
+
+  remark               String?
+
+  jobOpHeader1         String?  @map("job_op_header_1")
+  jobOpHeader2         String?  @map("job_op_header_2")
+  jobOpHeader3         String?  @map("job_op_header_3")
+  jobOpHeader4         String?  @map("job_op_header_4")
+  jobOpHeader5         String?  @map("job_op_header_5")
+
+  howManyDie           String?  @map("how_many_die")
+  typeOfDie            String?  @map("type_of_die")
+  nameOfDie            String?  @map("name_of_die")
+  dieNo                String?  @map("die_no")
+
+  cartonBy             String?  @map("carton_by")
+  labelBy              String?  @map("label_by")
+  dispatchBy           String?  @map("dispatch_by")
+  shrink               String?
+  typeOfPacking        String?  @map("type_of_packing")
+  requiredCtnPatti     String?  @map("required_ctn_patti")
+  packingRemark        String?  @map("packing_remark")
+
+  paperRequiredRemark  String?  @map("paper_required_remark")
+
+  bookedBy             String?  @map("booked_by")
+  companyName          String?  @map("company_name")
+  approvedBy           String?  @map("approved_by")
+
+  createdAt            DateTime @default(now()) @map("created_at")
+  updatedAt            DateTime @updatedAt @map("updated_at")
+  createdBy            String?  @map("created_by")
+  pdfUrl               String?  @map("pdf_url")
+
+  jobOperations        JobOperation[]
+  requiredItems        RequiredItem[]
+  requiredPaper        RequiredPaper[]
+
+  @@map("job_cards")
+}
+
+model JobOperation {
+  id         String  @id @default(cuid())
+  jobCardId  String  @map("job_card_id")
+  headerNo   Int?    @map("header_no")
+  rowNo      Int     @map("row_no")
+  colNo      Int     @map("col_no")
+  qty        Int?
+  machine    String?
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  jobCard    JobCard @relation(fields: [jobCardId], references: [id], onDelete: Cascade)
+
+  @@index([jobCardId])
+  @@index([headerNo])
+  @@map("job_operations")
+}
+
+model RequiredItem {
+  id         String  @id @default(cuid())
+  jobCardId  String  @map("job_card_id")
+  rowNo      Int     @map("row_no")
+  itemName   String? @map("item_name")
+  size       String?
+  qty        Int?
+  name       String?
+  remark     String?
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  jobCard    JobCard @relation(fields: [jobCardId], references: [id], onDelete: Cascade)
+
+  @@index([jobCardId])
+  @@map("required_items")
+}
+
+model RequiredPaper {
+  id             String  @id @default(cuid())
+  jobCardId      String  @map("job_card_id")
+  rowNo          Int     @map("row_no")
+  paperBoardName String? @map("paper_board_name")
+  gradeBrand     String? @map("grade_brand")
+  sizeOfPaper    String? @map("size_of_paper")
+  gsm            String?
+  qty            Int?
+  unit           String?
+  remark         String?
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  jobCard        JobCard @relation(fields: [jobCardId], references: [id], onDelete: Cascade)
+
+  @@index([jobCardId])
+  @@map("required_paper")
+}
+
+model DropdownOption {
+  id        String   @id @default(cuid())
+  category  String
+  value     String
+  order     Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([category, value])
+  @@index([category])
+  @@map("dropdown_options")
+}
